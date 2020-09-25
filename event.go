@@ -30,3 +30,9 @@ func (ev *Event) Done() <-chan struct{} {
 func (ev *Event) HasFired() bool {
 	return atomic.LoadInt32(&ev.fired) > 0
 }
+
+func Done() <-chan struct{} {
+	done := make(chan struct{})
+	close(done)
+	return done
+}

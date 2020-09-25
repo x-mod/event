@@ -1,7 +1,9 @@
 package event
 
 import (
+	"log"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -16,4 +18,11 @@ func TestEvent(t *testing.T) {
 	r2 := ev.Fire()
 	assert.Equal(t, int32(2), r2)
 	assert.Equal(t, true, ev.HasFired())
+
+	e2 := New()
+	time.AfterFunc(time.Second, func() {
+		e2.Fire()
+	})
+	log.Println("waiting 1 sec")
+	<-Done()
 }
